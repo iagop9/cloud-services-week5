@@ -616,44 +616,100 @@ PersistentVolumeClaim (mysql-data)</div>
 
 
     <section>
-        <h2>Week 5 - Public API Integration</h2>
+    <h2>Week 5 - Public API Integration</h2>
 
-        <p>
-            For Week 5, I extended the three-tier application from Week 4 by
-            integrating an external public API. The Flask backend now retrieves
-            current weather information for Oulu from the Open-Meteo API.
-        </p>
+    <p>
+        For Week 5, I extended the three-tier application from Week 4 by
+        integrating an external public API. The Flask backend now retrieves
+        current weather information for Oulu from the Open-Meteo API.
+    </p>
 
-        <p>
-            A new <code>/api/weather</code> endpoint was added to the backend.
-            The backend requests the external weather data and returns the relevant
-            values to the frontend as JSON. The browser therefore communicates
-            with my Flask backend instead of accessing the external API directly.
-        </p>
+    <p>
+        A new <code>/api/weather</code> endpoint was added to the backend.
+        The backend requests the external weather data and returns the relevant
+        values to the frontend as JSON. The browser therefore communicates
+        with my Flask backend instead of accessing the external API directly.
+    </p>
 
-        <p>
-            The extended data flow is:
-            <strong>Frontend → Flask backend → Open-Meteo API</strong>.
-            The original <strong>Frontend → Backend → MySQL</strong> flow is
-            still used for the persistent visit counter and database time.
-        </p>
+    <p>
+        The extended data flow is:
+        <strong>Frontend → Flask backend → Open-Meteo API</strong>.
+        The original <strong>Frontend → Backend → MySQL</strong> flow is
+        still used for the persistent visit counter and database time.
+    </p>
 
-        <p>
-            The integration displays the current temperature, apparent temperature,
-            wind speed, weather condition and observation time. Open-Meteo was
-            selected because it provides weather data through a REST API without
-            requiring an API key for this use case.
-        </p>
+    <p>
+        The integration displays the current temperature, apparent temperature,
+        wind speed, weather condition and observation time. Open-Meteo was
+        selected because it provides weather data through a REST API without
+        requiring an API key for this use case.
+    </p>
 
-        <figure>
-            <img src="/images/week5-02-local-application.png"
-                 alt="Week 5 public API integration running locally">
-            <figcaption>
-                Local Docker Compose test showing the original MySQL functionality
-                and the new Open-Meteo public API integration working together.
-            </figcaption>
-        </figure>
-    </section>
+    <h3>Local test</h3>
+
+    <p>
+        I first tested the extended application locally using Docker Compose.
+        The existing MySQL functionality and the new weather integration worked
+        together correctly.
+    </p>
+
+    <figure>
+        <img src="/images/week5-02-local-application.png"
+             alt="Week 5 application and Open-Meteo integration running locally">
+        <figcaption>
+            Week 5 application running locally with MySQL and live weather data.
+        </figcaption>
+    </figure>
+
+    <h3>Deployment on CSC Rahti</h3>
+
+    <p>
+        After the local test, I built the updated container images and deployed
+        the frontend and backend to CSC Rahti. The existing MySQL deployment
+        and persistent storage were kept in the application architecture.
+    </p>
+
+    <figure>
+        <img src="/images/week5-04-rahti-pods.png"
+             alt="Frontend backend and MySQL pods running on CSC Rahti">
+        <figcaption>
+            Frontend, backend and MySQL pods running successfully on CSC Rahti.
+        </figcaption>
+    </figure>
+
+    <h3>Testing the public endpoint</h3>
+
+    <p>
+        I verified the new endpoint through the public Rahti Route. A request
+        to <code>/api/weather</code> returned JSON containing current weather
+        information for Oulu, confirming that the deployed backend could
+        communicate with the external Open-Meteo API.
+    </p>
+
+    <figure>
+        <img src="/images/week5-05-rahti-public-api-terminal.png"
+             alt="Public weather API endpoint tested through the CSC Rahti Route">
+        <figcaption>
+            Testing the deployed /api/weather endpoint through the public Rahti Route.
+        </figcaption>
+    </figure>
+
+    <h3>Final result</h3>
+
+    <p>
+        Finally, I verified the integration from the deployed web application.
+        The frontend receives the weather information from the Flask backend
+        and displays it together with the original MySQL functionality.
+    </p>
+
+    <figure>
+        <img src="/images/week5-07-rahti-weather.png"
+             alt="Open-Meteo weather information displayed in the deployed application">
+        <figcaption>
+            Live Open-Meteo weather data displayed by the application deployed on Rahti.
+        </figcaption>
+    </figure>
+</section>
 
 
     <section>
