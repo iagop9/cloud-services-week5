@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: iagoprolg/cloud-services-week4-frontend:1.0.3
+          image: iagoprolg/cloud-services-week5-frontend:2.0.0
           ports:
             - containerPort: 8080
 ---

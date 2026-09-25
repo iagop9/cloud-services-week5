@@ -19,9 +19,9 @@ spec:
             - containerPort: 3306
           envFrom:
             - configMapRef:
-                name: week4-config
+                name: week5-config
             - secretRef:
-                name: week4-db-secret
+                name: week5-db-secret
           volumeMounts:
             - name: mysql-data
               mountPath: /var/lib/mysql

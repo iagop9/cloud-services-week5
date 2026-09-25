@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: backend
-          image: iagoprolg/cloud-services-week4-backend:1.0.1
+          image: iagoprolg/cloud-services-week5-backend:2.0.0
           ports:
             - containerPort: 8000
           envFrom:
             - configMapRef:
-                name: week4-config
+                name: week5-config
             - secretRef:
-                name: week4-db-secret
+                name: week5-db-secret
           readinessProbe:
             httpGet:
               path: /api/health
